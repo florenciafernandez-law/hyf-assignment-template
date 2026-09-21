@@ -1,2 +1,4 @@
 green
-red/nblue/n
+red
+blue
+pink    
