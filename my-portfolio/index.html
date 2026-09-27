@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A personal portfolio introduction and a few interests."
+    />
+    <title>Florencia Fernandez | My Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">A little introduction</p>
+      <h1>About Me</h1>
+      <p class="intro">
+        Hi, I’m <strong>Florencia Fernandez</strong>! I’m a student who enjoys
+        learning new things and taking on creative challenges. I made this page
+        to share a little about what I’m interested in and what I’m learning.
+      </p>
+
+      <section aria-labelledby="interests-heading">
+        <h2 id="interests-heading">Things I enjoy</h2>
+        <div class="interest-grid">
+          <details class="interest">
+            <summary>Creative projects</summary>
+            <ul class="interest-list">
+              <li>Drawing and home decoration</li>
+              <li>Making things by hand</li>
+              <li>Coming up with new ideas</li>
+            </ul>
+          </details>
+          <details class="interest">
+            <summary>Learning new skills</summary>
+            <ul class="interest-list">
+              <li>Practicing new languages</li>
+              <li>Solving tricky problems</li>
+              <li>Trying something unfamiliar</li>
+            </ul>
+          </details>
+          <details class="interest">
+            <summary>Technology</summary>
+            <ul class="interest-list">
+              <li>Learning how websites work</li>
+              <li>Exploring digital tools</li>
+              <li>Creating with code</li>
+            </ul>
+          </details>
+        </div>
+      </section>
+
+      <section class="social-section" aria-labelledby="social-heading">
+        <h2 id="social-heading">Find me online</h2>
+        <nav class="social-links" aria-label="Social media">
+          <a
+            href="https://github.com/florenciafernandez-law"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://codepen.io/florencialegaldk-hash"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            CodePen
+          </a>
+        </nav>
+      </section>
+
+      <div class="button-row">
+        <button id="color-button" type="button">
+          Surprise me with a color
+        </button>
+      </div>
+    </main>
+
+    <script>
+      const colorButton = document.querySelector("#color-button");
+      const colors = [
+        "#eaf4e2",
+        "#fce8e6",
+        "#fff2cc",
+        "#e5efff",
+        "#f3e8ff",
+        "#dff5f0",
+        "#ffe8f1",
+      ];
+      let previousColor = "";
+
+      colorButton.addEventListener("click", () => {
+        const availableColors = colors.filter(
+          (color) => color !== previousColor,
+        );
+        const nextColor =
+          availableColors[Math.floor(Math.random() * availableColors.length)];
+
+        document.body.style.backgroundColor = nextColor;
+        previousColor = nextColor;
+      });
+    </script>
+  </body>
+</html>
