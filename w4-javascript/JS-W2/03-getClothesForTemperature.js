@@ -6,7 +6,7 @@ function getClothesForTemperature(temperature) {
   } else if (temperature < 18) {
     return "a light jacket and jeans";
   } else if (temperature === undefined) {
-    return "no temperature available";
+    return "temperature unavailable, please provide a temperature value";
   } else {
     return "shorts and a t-shirt";
   }
