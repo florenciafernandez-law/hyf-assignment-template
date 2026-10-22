@@ -1,4 +1,4 @@
-let notes = [];
+const notes = [];
 
 function saveNote(content, id) {
   notes.push({ content, id });
