@@ -1,4 +1,4 @@
-let activities = [];
+const activities = [];
 
 const dateOptions = {
   weekday: "long",
@@ -19,7 +19,7 @@ addActivity("Facebook", 80);
 console.log(activities);
 
 function showStatus(activities) {
-  const today = new Date().toLocaleDateString("en-US", dateOptions);
+  const today = new Date().toLocaleDateString();
   const todaysActivities = activities.filter((item) => item.date === today);
 
   if (todaysActivities.length === 0) {
@@ -41,8 +41,10 @@ function showStatus(activities) {
 }
 
 function getMostUsedActivity(activities) {
-  if (activities.length === 0) {
-    console.log("Add some activities before calculating the most used activity");
+  if (!activities.length) {
+    console.log(
+      "Add some activities before calculating the most used activity",
+    );
     return;
   }
 
