@@ -1,16 +1,15 @@
 import express from "express";
-
-const app = express();
-const port = 3000;
+const app = express(); 
 
 app.get("/", (req, res) => {
-  res.send("Hello from exercise 1!");
+  res.send("This is the exercise of Florencia!");
 });
 
 app.get("/currentYear", (req, res) => {
-  // TODO: Implement this function to return a JSON object containing the current year
+  res.json({ currentYear: new Date().getFullYear() });
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+app.listen(3000, function () {
+  console.log(`>Ready on http://localhost:3000`);
 });
+
