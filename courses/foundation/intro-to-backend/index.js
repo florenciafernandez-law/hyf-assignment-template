@@ -11,9 +11,6 @@ const db = knex({
   useNullAsDefault: true,
 });
 
-// ---------------------------------------------------------------------------
-// HOME — devuelve una página HTML que consume /user-count desde el navegador
-// ---------------------------------------------------------------------------
 app.get("/", (req, res) => {
   res.send(`<!DOCTYPE html>
 <html lang="en">
@@ -111,32 +108,20 @@ app.get("/", (req, res) => {
 </html>`);
 });
 
-// ---------------------------------------------------------------------------
-// Ruta que ya tenías
-// ---------------------------------------------------------------------------
 app.get("/currentYear", (req, res) => {
   res.json({ currentYear: new Date().getFullYear() });
 });
 
-// ---------------------------------------------------------------------------
-// /user-count — la que consume la página de arriba
-// ---------------------------------------------------------------------------
 app.get("/user-count", async (req, res) => {
   const result = await db("users").count("* as count").first();
   res.json({ count: result.count });
 });
 
-// ---------------------------------------------------------------------------
-// RUTA NUEVA 1 — parámetro de ruta (route param)
-// ---------------------------------------------------------------------------
 app.get("/greet/:name", (req, res) => {
   const { name } = req.params;
   res.json({ message: `Hello, ${name}!` });
 });
 
-// ---------------------------------------------------------------------------
-// RUTA NUEVA 2 — query params + validación
-// ---------------------------------------------------------------------------
 app.get("/sum", (req, res) => {
   const a = Number(req.query.a);
   const b = Number(req.query.b);
@@ -150,9 +135,6 @@ app.get("/sum", (req, res) => {
   res.json({ a, b, result: a + b });
 });
 
-// ---------------------------------------------------------------------------
-// RUTA NUEVA 3 — lee la base de datos con knex
-// ---------------------------------------------------------------------------
 app.get("/users", async (req, res) => {
   const users = await db("users").select("*").limit(20);
   res.json(users);
