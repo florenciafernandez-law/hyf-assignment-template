@@ -2,7 +2,7 @@ import express from "express";
 import knex from "knex";
 
 const app = express();
-const port = 3000;
+app.use(express.json());
 
 // This connects to the database stored in the file mentioned below
 const knexInstance = knex({
@@ -10,21 +10,47 @@ const knexInstance = knex({
   connection: {
     filename: "./database.sqlite3",
   },
-  useNullAsDefault: true,  // Omit warning in console
+  useNullAsDefault: true, // Omit warning in console
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello from exercise 2!");
+  res.send("This is the exercise 2 of Florencia!");
 });
 
-// Here is an example of the first route, /all-users, which returns all users sorted by their ID
 app.get("/all-users", async (req, res) => {
   const rows = await knexInstance.raw("SELECT * FROM users ORDER BY id ASC;");
   res.json(rows);
 });
 
-// TODO implement more routes here
+app.get("/users/:id", async (req, res) => {
+  const user = await knexInstance("users").where({ id: req.params.id }).first();
+  if (!user) return res.status(404).json({ error: "User not found" });
+  res.json(user);
+});
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+app.post("/users", async (req, res) => {
+  const [id] = await knexInstance("users").insert(req.body);
+  const user = await knexInstance("users").where({ id }).first();
+  res.status(201).json(user);
+});
+
+app.put("/users/:id", async (req, res) => {
+  const updated = await knexInstance("users")
+    .where({ id: req.params.id })
+    .update(req.body);
+  if (!updated) return res.status(404).json({ error: "User not found" });
+  const user = await knexInstance("users").where({ id: req.params.id }).first();
+  res.json(user);
+});
+
+app.delete("/users/:id", async (req, res) => {
+  const deleted = await knexInstance("users")
+    .where({ id: req.params.id })
+    .del();
+  if (!deleted) return res.status(404).json({ error: "User not found" });
+  res.status(204).end();
+});
+
+app.listen(3000, function () {
+  console.log(`>Ready on http://localhost:3000`);
 });
